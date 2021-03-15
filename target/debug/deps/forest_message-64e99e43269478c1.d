@@ -1,0 +1,11 @@
+/Users/admin/rust_project/file-signer/target/debug/deps/forest_message-64e99e43269478c1.rmeta: /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/lib.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/chain_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/message_receipt.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/signed_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/unsigned_message.rs
+
+/Users/admin/rust_project/file-signer/target/debug/deps/libforest_message-64e99e43269478c1.rlib: /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/lib.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/chain_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/message_receipt.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/signed_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/unsigned_message.rs
+
+/Users/admin/rust_project/file-signer/target/debug/deps/forest_message-64e99e43269478c1.d: /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/lib.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/chain_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/message_receipt.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/signed_message.rs /Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/unsigned_message.rs
+
+/Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/lib.rs:
+/Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/chain_message.rs:
+/Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/message_receipt.rs:
+/Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/signed_message.rs:
+/Users/admin/.cargo/registry/src/github.com-1ecc6299db9ec823/forest_message-0.6.0/src/unsigned_message.rs:

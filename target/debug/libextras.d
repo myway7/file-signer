@@ -1,0 +1,1 @@
+/Users/admin/rust_project/file-signer/target/debug/libextras.rlib: /Users/admin/rust_project/file-signer/extras/src/lib.rs /Users/admin/rust_project/file-signer/extras/src/multisig.rs /Users/admin/rust_project/file-signer/extras/src/paych.rs build.rs

@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "extras",
+    "signer",
+    "signer-ffi",
+    "test_tool"
+]
