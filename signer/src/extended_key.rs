@@ -16,6 +16,7 @@ const HARDENED_BIT: u32 = 1 << 31;
 #[zeroize(drop)]
 struct ChainCode([u8; 32]);
 
+#[derive( Debug)]
 pub struct ExtendedSecretKey {
     secret_key: SecretKey,
     chain_code: ChainCode,

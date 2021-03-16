@@ -37,6 +37,7 @@ pub mod signature;
 pub mod utils;
 
 /// Mnemonic string
+#[derive( Debug)]
 pub struct Mnemonic(pub String);
 
 /// CBOR message in a buffer
@@ -110,9 +111,10 @@ impl TryFrom<Vec<u8>> for PrivateKey {
     }
 }
 
-/// Generates a random mnemonic (English - 24 words)
+/// Generates a random mnemonic (English - 12 words)
+/// 生成助记词
 pub fn key_generate_mnemonic() -> Result<Mnemonic, SignerError> {
-    let mnemonic = bip39::Mnemonic::new(MnemonicType::Words24, Language::English);
+    let mnemonic = bip39::Mnemonic::new(MnemonicType::Words12, Language::English);
     Ok(Mnemonic(mnemonic.to_string()))
 }
 
@@ -124,7 +126,7 @@ fn derive_extended_secret_key(seed: &[u8], path: &str) -> Result<ExtendedSecretK
     Ok(esk)
 }
 
-fn derive_extended_secret_key_from_mnemonic(
+pub fn derive_extended_secret_key_from_mnemonic(
     mnemonic: &str,
     path: &str,
     password: &str,
@@ -325,7 +327,7 @@ fn transaction_sign_secp56k1_raw(
     Ok(signature)
 }
 
-fn transaction_sign_bls_raw(
+pub fn transaction_sign_bls_raw(
     unsigned_message_api: &UnsignedMessageAPI,
     private_key: &PrivateKey,
 ) -> Result<SignatureBLS, SignerError> {
