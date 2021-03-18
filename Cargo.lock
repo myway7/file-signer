@@ -1343,6 +1343,7 @@ dependencies = [
 name = "test_tool"
 version = "0.1.0"
 dependencies = [
+ "hex 0.4.2 (git+https://github.com/Zondax/rust-hex?rev=6e35fb48999278c8c6c75b099baa4ea2a9d1d12b)",
  "signer 0.1.0",
 ]
 

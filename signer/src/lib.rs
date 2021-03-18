@@ -54,11 +54,11 @@ pub const SIGNATURE_RECOVERY_SIZE: usize = SIGNATURE_SIZE + 1;
 pub const BLS_PUB_LEN: usize = 48;
 
 /// Private key buffer
+#[derive( Debug)]
 pub struct PrivateKey(pub [u8; SECRET_KEY_SIZE]);
 
 /// Public key secp256k1 buffer
 pub struct PublicKeySECP256K1(pub [u8; FULL_PUBLIC_KEY_SIZE]);
-
 pub enum PublicKey {
     PublicKeySECP256K1(PublicKeySECP256K1),
     BLSPublicKey(BLSPublicKey),
@@ -118,6 +118,20 @@ pub fn key_generate_mnemonic() -> Result<Mnemonic, SignerError> {
     Ok(Mnemonic(mnemonic.to_string()))
 }
 
+///助记词生成种子
+pub fn seed_from_mnemonic() -> Seed {
+    let mnemonic = bip39::Mnemonic::new(MnemonicType::Words12, Language::English);
+    let seed = Seed::new(&mnemonic, "");
+    return seed
+
+}
+
+///种子生成主私钥
+pub fn master_from_seed(seed:&[u8]) -> Result<ExtendedSecretKey, SignerError> {
+    let master = ExtendedSecretKey::try_from(seed);
+    return master
+}
+
 fn derive_extended_secret_key(seed: &[u8], path: &str) -> Result<ExtendedSecretKey, SignerError> {
     let master = ExtendedSecretKey::try_from(seed)?;
     let bip44_path = BIP44Path::from_string(path)?;
@@ -126,6 +140,7 @@ fn derive_extended_secret_key(seed: &[u8], path: &str) -> Result<ExtendedSecretK
     Ok(esk)
 }
 
+///助记词生成私钥
 pub fn derive_extended_secret_key_from_mnemonic(
     mnemonic: &str,
     path: &str,

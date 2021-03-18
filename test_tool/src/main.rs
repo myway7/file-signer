@@ -1,40 +1,57 @@
-use signer::{key_generate_mnemonic, derive_extended_secret_key_from_mnemonic};
+use signer::{key_generate_mnemonic, derive_extended_secret_key_from_mnemonic,
+             seed_from_mnemonic,master_from_seed,key_derive};
+use signer::error::SignerError;
+use signer::extended_key::ExtendedSecretKey;
+
 fn main(){
-    // display_mnemonic()
+    // generate_mnemonic()
     // secret_key_from_mnemonic()
     // get_key_derive()
-    transaction_sign_bls()
+    // transaction_sign_bls()
+    // master()
+    // secret_key()
 }
 
+///the first step
+///generate mnemonic
+fn generate_mnemonic(){
+    let mne = key_generate_mnemonic().expect("could not genarate mnemonic");
+    println!("{:?}",mne.0);
+    // match mne{
+    //     Ok(word)=>{
+    //         println!("result:{:?}",word.0);
+    //     },
+    //     Err(err)=>{
+    //         println!("err:{:?}",err);
+    //     }
+    // }
+}
 
-///显示助记词
-fn display_mnemonic(){
-    let mne = key_generate_mnemonic();
-    match mne{
-        Ok(word)=>{
-            println!("result:{:?}",word.0);
-        },
-        Err(err)=>{
-            println!("err:{:?}",err);
-        }
-    }
+///the second step
+///mnemonic -> seed
+fn seed(){
+    println!("{:?}",seed_from_mnemonic())
+
+}
+
+///the third step
+/// seed -> master
+fn master(){
+   let master =  master_from_seed(seed_from_mnemonic().as_bytes()).unwrap();
+    println!("{:?}",master);
+    println!("{:?}",hex::encode(master.secret_key()).to_string());
+    println!("{:?}",hex::encode(master.chain_code()).to_string())
 }
 
 ///生成私钥
-fn secret_key_from_mnemonic(){
+fn secret_key(){
     let mnemonic = String::from("predict course total rifle tip sense want deer youth nose town frog");
-    let path = String::from("m/44'/60'/0'/0/0");
+    let path = String::from("m/44'/461'/0'/0/0");
     let password = String::from("123456");
     let lang_code = String::from("en");
-    let secret = derive_extended_secret_key_from_mnemonic(&*mnemonic, &*path, &*password, &*lang_code);
-    match secret {
-        Ok(s)=>{
-            println!("{:?}",s)
-        },
-         Err(err)=>{
-              println!("err:{:?}",err);
-         }
-    }
+    let secret = key_derive(&*mnemonic, &*path, &*password, &*lang_code).unwrap();
+    println!("{}",secret.address);
+    println!("{:?}",hex::encode(secret.private_key.0));
 }
 
 ///bls签名
