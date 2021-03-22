@@ -2,15 +2,12 @@ use core::{convert::TryFrom, fmt};
 use secp256k1::util::SIGNATURE_SIZE;
 
 use crate::error::SignerError;
-
 pub const SIGNATURE_RECOVERY_SIZE: usize = SIGNATURE_SIZE + 1;
 
 pub const BLS_SIGNATURE_SIZE: usize = 96;
 
 pub struct SignatureSECP256K1(pub [u8; SIGNATURE_RECOVERY_SIZE]);
-
 pub struct SignatureBLS(pub [u8; BLS_SIGNATURE_SIZE]);
-
 pub enum Signature {
     SignatureSECP256K1(SignatureSECP256K1),
     SignatureBLS(SignatureBLS),

@@ -1,7 +1,11 @@
 use signer::{key_generate_mnemonic, derive_extended_secret_key_from_mnemonic,
-             seed_from_mnemonic,master_from_seed,key_derive};
+             seed_from_mnemonic,master_from_seed,key_derive,transaction_sign_raw};
 use signer::error::SignerError;
 use signer::extended_key::ExtendedSecretKey;
+use signer::api::UnsignedMessageAPI;
+use std::convert::TryFrom;
+use signer::*;
+use signer::signature::Signature;
 
 fn main(){
     // generate_mnemonic()
@@ -10,6 +14,7 @@ fn main(){
     // transaction_sign_bls()
     // master()
     // secret_key()
+    transaction_sign_bls()
 }
 
 ///the first step
@@ -55,47 +60,24 @@ fn secret_key(){
 }
 
 ///bls签名
-// const privateKeyBase64 = "NZrLSD1pztRBFooiFK9JutcJ0Hlb1FAAP2tNStpfQk4=";
-// const message = {
-//     Version: 0,
-//     To: "f01007",
-//     From:
-//     "f3wlgsim745hmsyo73egqmpszst4lo5fsppevvvkfyn3dmaqsjecgtdcxhz52xz2drk73ouuxpngegn6il3aja",
-//     Nonce: 1,
-//     Value: "0",
-//     GasLimit: 1990041,
-//     GasFeeCap: "100851",
-//     GasPremium: "99797",
-//     Method: 23,
-//     Params: "QwD0Bw==",
-// };
-#[derive( Debug)]
-struct Message {
-     to: String,
-     from: String,
-     nonce: u64,
-     value: String,
-     gas_limit: i64,
-     gas_fee_cap: String,
-     gas_premium: String,
-     method: u64,
-     params: String,
-}
-fn transaction_sign_bls(){
-    let privateKeyBase64 = String::from("NZrLSD1pztRBFooiFK9JutcJ0Hlb1FAAP2tNStpfQk4=");
-
-    let mesage = Message{
-        to:String::from("f01007"),
-        from:String::from("f3wlgsim745hmsyo73egqmpszst4lo5fsppevvvkfyn3dmaqsjecgtdcxhz52xz2drk73ouuxpngegn6il3aja"),
-        nonce:1,
-        value: String::from("0"),
-        gas_limit:1990041,
-        gas_fee_cap:String::from("100851"),
-        gas_premium:String::from("99797"),
-        method:23,
-        params:String::from("QwD0Bw=="),
+fn transaction_sign_bls() {
+    // "bls_private_key": "P2pSgkvsZSgi0LOczuHmSXT1+l/hvSs3fVBb4y8OgVo=",
+    // "bls_address": "t3uxb75vcy3ilwbsaavao52v7gfnfh6aics4a7nj26dwpcmj4mxxgnzholkupuplafdrbd55frpoolfnm7wlda",
+    // "private_key": "8VcW07ADswS4BV2cxi5rnIadVsyTDDhY1NfDH19T8Uo="
+    // Prepare message with BLS address
+    let bls_address = "t3uxb75vcy3ilwbsaavao52v7gfnfh6aics4a7nj26dwpcmj4mxxgnzholkupuplafdrbd55frpoolfnm7wlda";
+    let bls_key = PrivateKey::try_from("8VcW07ADswS4BV2cxi5rnIadVsyTDDhY1NfDH19T8Uo=".to_string()).unwrap();
+    let message = UnsignedMessageAPI {
+        to: "t17uoq6tp427uzv7fztkbsnn64iwotfrristwpryy".to_string(),
+        from: bls_address.to_string(),
+        nonce: 1,
+        value: "100000".to_string(),
+        gas_limit: 25000,
+        gas_fee_cap: "2500".to_string(),
+        gas_premium: "2500".to_string(),
+        method: 0,
+        params: "".to_string(),
     };
-    println!("{:?}",mesage);
-
-
+    let raw_sig = transaction_sign_raw(&message,&bls_key).unwrap();
+    let res = CborBuffer(raw_sig.as_bytes());
 }
